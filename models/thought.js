@@ -1,18 +1,22 @@
 const { Schema, model } = require('mongoose');
 
-const courseSchema = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
       required: true,
+      maxlength: 280,
     },
     createdAt: {
       type: Boolean,
       default: true,
+      get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
     },
     username: {
       type: Date,
-      default: Date.now(),
+      require: true,
+      trim: true,
+      unique: true,
     },
     reactions: {
       type: Date,
@@ -29,6 +33,6 @@ const courseSchema = new Schema(
   }
 );
 
-const Course = model('course', courseSchema);
+const Thought = model('thought', thoughtSchema);
 
-module.exports = Course;
+module.exports = Thought;

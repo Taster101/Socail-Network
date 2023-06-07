@@ -1,14 +1,16 @@
 const { Schema, model } = require('mongoose');
 
-const courseSchema = new Schema(
+const reactionSchema = new Schema(
   {
     reactionId: {
       type: String,
       required: true,
+       default: () => new Types.ObjectId() ,
     },
     reactionBody: {
-      type: Boolean,
+      type: String,
       default: true,
+      maxlenght: 280,
     },
     username: {
       type: Date,
@@ -17,6 +19,8 @@ const courseSchema = new Schema(
     createdAt: {
       type: Date,
       default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
+      get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
+
     },
     
     
@@ -29,6 +33,6 @@ const courseSchema = new Schema(
   }
 );
 
-const Course = model('course', courseSchema);
+const Reaction = model('course', reactionSchema);
 
-module.exports = Course;
+module.exports = Reaction;
