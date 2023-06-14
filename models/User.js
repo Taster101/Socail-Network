@@ -12,8 +12,8 @@ const userSchema = new Schema(
       type: String,
       default: true,
       unique: true,
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
       
-        validator: email
       ,
 
     },
@@ -25,6 +25,12 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    thoughts: [
+      {
+       type: Schema.Types.ObjectId,
+       ref: 'thoughts'
+      }
+    ]
     
     
   },

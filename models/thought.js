@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('./reaction');
 
 const thoughtSchema = new Schema(
   {
@@ -8,20 +9,20 @@ const thoughtSchema = new Schema(
       maxlength: 280,
     },
     createdAt: {
-      type: Boolean,
-      default: true,
-      get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
+      type: String,
+      //default: true,
+      //get: createdAtVal => moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
     },
     username: {
-      type: Date,
+      type: String,
       require: true,
       trim: true,
       unique: true,
     },
-    reactions: {
-      type: Date,
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
-    },
+    reactions: [reactionSchema]
+    
+     
+    
     
     
   },
